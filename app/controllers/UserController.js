@@ -11,7 +11,7 @@ class UserController {
   constructor() {}
 
   async regist(ctx) {
-    let {
+    const {
       email,
       password
     } = ctx.request.body;
@@ -39,7 +39,7 @@ class UserController {
   }
 
   async login(ctx) {
-    let {
+    const {
       email,
       password
     } = ctx.request.body;
@@ -57,7 +57,7 @@ class UserController {
     if (!user) {
       throw new Error(ResConstant.PASSWORD_ERROR.key);
     }
-    let token = jwt.sign({
+    const token = jwt.sign({
       email: user.email,
       userId: user.id
     }, config.jwt.scret, {
