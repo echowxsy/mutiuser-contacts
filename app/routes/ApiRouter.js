@@ -8,7 +8,7 @@ let api = Router({
 api.get('/', (ctx) => {
   ctx.body = 'Hello World';
 });
-api.post('/register', UserController.register);
+api.post('/regist', UserController.regist);
 
 
 module.exports = api;

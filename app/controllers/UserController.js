@@ -8,8 +8,8 @@ const {
 
 class UserController {
   constructor() {}
-
-  async register(ctx) {
+  
+  async regist(ctx) {
     let {
       email,
       password
