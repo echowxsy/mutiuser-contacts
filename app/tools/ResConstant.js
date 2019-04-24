@@ -30,7 +30,17 @@ let userMessage = {
     code: 101,
     message: '邮箱错误',
     key: 'EMAIL_ERROR'
-  }
+  },
+  PASSWORD_ERROR: {
+    code: 102,
+    message: '密码错误',
+    key: 'PASSWORD_ERROR'
+  },
+  LOGIN_SUCCESS: {
+    code: 200,
+    message: '登陆成功',
+    key: 'LOGIN_SUCCESS'
+  },
 }
 
 let resConstant = {

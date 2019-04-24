@@ -3,12 +3,13 @@ const crypto = require('crypto');
 const {
   User
 } = require('../models/index');
-
+const jwt = require('jsonwebtoken');
+const config = require('../config/index');
 
 
 class UserController {
   constructor() {}
-  
+
   async regist(ctx) {
     let {
       email,
@@ -37,7 +38,35 @@ class UserController {
     ctx.returnValue(ResConstant.REGIST_SUCCESS.key);
   }
 
-  async login(ctx) {}
+  async login(ctx) {
+    let {
+      email,
+      password
+    } = ctx.request.body;
+
+    if (!email || !password) {
+      throw new Error(ResConstant.ERROR_ARGUMENTS.key);
+    }
+    let md5 = crypto.createHash('md5');
+    let user = await User.findOne({
+      where: {
+        email: email,
+        password: md5.update(password).digest('hex'),
+      }
+    })
+    if (!user) {
+      throw new Error(ResConstant.PASSWORD_ERROR.key);
+    }
+    let token = jwt.sign({
+      email: user.email,
+      userId: user.id
+    }, config.jwt.scret, {
+      expiresIn: config.jwt.expiresIn
+    });
+    ctx.returnValue(ResConstant.LOGIN_SUCCESS.key, {
+      token: token
+    })
+  }
 
   async changePassword(ctx) {}
 
