@@ -14,7 +14,7 @@ class UserController {
       email,
       password
     } = ctx.request.body;
-    console.log(ctx.request.body)
+
     if (!email || !password) {
       throw new Error(ResConstant.ERROR_ARGUMENTS.key);
     }
