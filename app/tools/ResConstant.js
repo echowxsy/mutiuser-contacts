@@ -41,6 +41,11 @@ let userMessage = {
     message: '登陆成功',
     key: 'LOGIN_SUCCESS'
   },
+  USER_NEED_LOGIN:{
+    code: 103,
+    message: '需要登录',
+    key: 'USER_NEED_LOGIN'
+  }
 }
 
 let resConstant = {
