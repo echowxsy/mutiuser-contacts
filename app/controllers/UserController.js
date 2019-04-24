@@ -34,8 +34,7 @@ class UserController {
       email: email,
       password: md5.update(password).digest('hex'),
     })
-    ctx.body = 'regist succeed';
-
+    ctx.returnValue(ResConstant.REGIST_SUCCESS.key);
   }
 
   async login(ctx) {}
