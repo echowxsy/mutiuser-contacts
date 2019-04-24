@@ -21,6 +21,7 @@
     "koa-bodyparser": "^4.2.1",
     "koa-cors": "0.0.16",
     "koa-router": "^7.4.0",
-    "log4js": "^4.1.0"
+    "log4js": "^4.1.0",
+    "sequelize": "^5.7.5"
   }
 }
