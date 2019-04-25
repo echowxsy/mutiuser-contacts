@@ -45,6 +45,28 @@ class ContactController {
     ctx.returnValue(ResConstant.CONTACT_GET_SUCCESS.key, contactList)
   }
 
+  async put(ctx) {
+    const {
+      id,
+      name,
+      phoneNumber,
+      birthday
+    } = ctx.request.body;
+    const userId = ctx.passport.userId;
+    let contact = await ContactModel.findOne({
+      attributes: ['id', 'name', 'phoneNumber', 'birthday'],
+      where: {
+        user_id: userId,
+        id: id
+      }
+    })
+    await contact.update({
+      name,
+      phoneNumber,
+      birthday
+    })
+    ctx.returnValue(ResConstant.CONTACT_PUT_SUCCESS.key, contact)
+  }
 }
 
 module.exports = new ContactController();

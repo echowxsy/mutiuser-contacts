@@ -78,6 +78,11 @@ const contactMessage = {
     message: '获取联系人列表成功',
     key: 'CONTACT_GET_SUCCESS'
   },
+  CONTACT_PUT_SUCCESS: {
+    code: 0,
+    message: '联系人修改成功',
+    key: 'CONTACT_PUT_SUCCESS'
+  },
 }
 
 const resConstant = {

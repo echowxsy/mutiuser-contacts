@@ -18,5 +18,6 @@ api.get('/oauth/refreshtoken', JsonWebTokenMiddleware, UserController.refreshTok
 
 api.post('/contact', JsonWebTokenMiddleware, ContactController.add);
 api.get('/contact', JsonWebTokenMiddleware, ContactController.get);
+api.put('/contact', JsonWebTokenMiddleware, ContactController.put);
 
 module.exports = api;
