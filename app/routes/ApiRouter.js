@@ -2,6 +2,7 @@ const Router = require('koa-router');
 const UserController = require('../controllers/UserController');
 const JsonWebTokenMiddleware = require('../middlewares/JsonWebTokenAuth');
 const ContactController = require('../controllers/ContactController');
+const GroupController = require('../controllers/GroupController');
 
 let api = Router({
   prefix: '/v1'
@@ -21,4 +22,11 @@ api.get('/contact', JsonWebTokenMiddleware, ContactController.get);
 api.put('/contact', JsonWebTokenMiddleware, ContactController.put);
 api.delete('/contact', JsonWebTokenMiddleware, ContactController.del);
 
+api.post('/group', JsonWebTokenMiddleware, GroupController.add);
+api.get('/group', JsonWebTokenMiddleware, GroupController.get);
+api.put('/group', JsonWebTokenMiddleware, GroupController.put);
+api.delete('/group', JsonWebTokenMiddleware, GroupController.del);
+api.get('/group/:groupId', JsonWebTokenMiddleware, GroupController.getContactList);
+api.put('/group/:groupId', JsonWebTokenMiddleware, GroupController.addContact);
+api.delete('/group/:groupId', JsonWebTokenMiddleware, GroupController.removeContact);
 module.exports = api;

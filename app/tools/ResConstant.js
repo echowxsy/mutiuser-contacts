@@ -89,11 +89,49 @@ const contactMessage = {
     key: 'CONTACT_DEL_SUCCESS'
   },
 }
+const groupMessage = {
+  GROUP_ADD_SUCCESS: {
+    code: 0,
+    message: '分组添加成功',
+    key: 'GROUP_ADD_SUCCESS'
+  },
+  GROUP_GET_SUCCESS: {
+    code: 0,
+    message: '分组列表获取成功',
+    key: 'GROUP_GET_SUCCESS'
+  },
+  GROUP_INFO_GET_SUCCESS: {
+    code: 0,
+    message: '分组信息获取成功',
+    key: 'GROUP_INFO_GET_SUCCESS'
+  },
+  GROUP_ADD_CONTACT_SUCCESS: {
+    code: 0,
+    message: '分组添加联系人成功',
+    key: 'GROUP_ADD_CONTACT_SUCCESS'
+  },
+  GROUP_PUT_SUCCESS: {
+    code: 0,
+    message: '分组信息更新成功',
+    key: 'GROUP_PUT_SUCCESS'
+  },
+  GROUP_DEL_SUCCESS: {
+    code: 0,
+    message: '分组删除成功',
+    key: 'GROUP_DEL_SUCCESS'
+  },
+  GROUP_DEL_CONTACT_SUCCESS: {
+    code: 0,
+    message: '分组移除联系人成功',
+    key: 'GROUP_DEL_CONTACT_SUCCESS'
+  },
+}
 
 const resConstant = {
   ...systemMessage,
   ...userMessage,
-  ...contactMessage
+  ...contactMessage,
+  ...groupMessage,
 }
 
 module.exports = resConstant;
