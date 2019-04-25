@@ -1,8 +1,6 @@
 const ResConstant = require('../tools/ResConstant');
 const crypto = require('crypto');
-const {
-  User
-} = require('../models/index');
+const UserModel = require('../models/index').User;
 const jwt = require('jsonwebtoken');
 const config = require('../config/index');
 
@@ -22,7 +20,7 @@ class UserController {
     if (!checkEmail(email)) {
       throw new Error(ResConstant.EMAIL_ERROR.key);
     }
-    let user = await User.findOne({
+    let user = await UserModel.findOne({
       where: {
         email: email
       }
@@ -30,8 +28,7 @@ class UserController {
     if (user) {
       throw new Error(ResConstant.EMAIL_USED.key);
     }
-    let md5 = crypto.createHash('md5');
-    user = await User.create({
+    user = await UserModel.create({
       email: email,
       password: md5.update(password).digest('hex'),
     })
@@ -47,8 +44,7 @@ class UserController {
     if (!email || !password) {
       throw new Error(ResConstant.ERROR_ARGUMENTS.key);
     }
-    let md5 = crypto.createHash('md5');
-    let user = await User.findOne({
+    let user = await UserModel.findOne({
       where: {
         email: email,
         password: md5.update(password).digest('hex'),
