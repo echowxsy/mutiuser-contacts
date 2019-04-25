@@ -67,10 +67,18 @@ const userMessage = {
     key: 'TOKEN_REFRESH'
   },
 }
+const contactMessage = {
+  CONTACT_ADD_SUCCESS: {
+    code: 200,
+    message: '联系人添加成功',
+    key: 'CONTACT_ADD_SUCCESS'
+  },
+}
 
 const resConstant = {
   ...systemMessage,
-  ...userMessage
+  ...userMessage,
+  ...contactMessage
 }
 
 module.exports = resConstant;
