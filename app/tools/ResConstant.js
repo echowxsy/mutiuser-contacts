@@ -1,4 +1,4 @@
-let systemMessage = { //code range(-1,9)
+const systemMessage = { //code range(-1,9)
   SYSTEM_SUCCESS: {
     code: 0,
     message: '请求成功',
@@ -15,7 +15,7 @@ let systemMessage = { //code range(-1,9)
     key: 'ERROR_ARGUMENTS'
   }
 }
-let userMessage = {
+const userMessage = {
   REGIST_SUCCESS: {
     code: 200,
     message: '注册成功',
@@ -41,7 +41,7 @@ let userMessage = {
     message: '登陆成功',
     key: 'LOGIN_SUCCESS'
   },
-  USER_NEED_LOGIN:{
+  USER_NEED_LOGIN: {
     code: 103,
     message: '需要登录',
     key: 'USER_NEED_LOGIN'
@@ -68,7 +68,7 @@ let userMessage = {
   },
 }
 
-let resConstant = {
+const resConstant = {
   ...systemMessage,
   ...userMessage
 }
