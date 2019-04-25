@@ -42,7 +42,24 @@ class ContactController {
     const contactList = await user.getContacts({
       attributes: ['id', 'name', 'phoneNumber', 'birthday']
     });
-    ctx.returnValue(ResConstant.CONTACT_GET_SUCCESS.key, contactList)
+    const keyword = ctx.query.s;
+    if (!keyword) {
+      ctx.returnValue(ResConstant.CONTACT_GET_SUCCESS.key, {
+        count: contactList.length,
+        list: contactList
+      })
+    }
+    const regExp = new RegExp(keyword);
+    let hitList = [];
+    contactList.forEach(element => {
+      if (regExp.test(JSON.stringify(element))) {
+        hitList.push(element)
+      }
+    });
+    ctx.returnValue(ResConstant.CONTACT_GET_SUCCESS.key, {
+      count: hitList.length,
+      list: hitList
+    })
   }
 
   async put(ctx) {
@@ -78,6 +95,11 @@ class ContactController {
       }
     })
     ctx.returnValue(ResConstant.CONTACT_DEL_SUCCESS.key)
+  }
+
+  async search(ctx) {
+
+
   }
 }
 
