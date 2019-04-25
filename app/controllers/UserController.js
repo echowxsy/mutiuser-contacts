@@ -91,7 +91,19 @@ class UserController {
     ctx.returnValue(ResConstant.UPDATE_PASSWORD_SUCCESS.key)
   }
 
-  async logout(ctx) {}
+  async refreshToken(ctx) {
+    const userId = ctx.passport.userId;
+    const email = ctx.passport.email;
+    const token = jwt.sign({
+      email: email,
+      userId: userId
+    }, config.jwt.scret, {
+      expiresIn: config.jwt.expiresIn
+    });
+    ctx.returnValue(ResConstant.TOKEN_REFRESH.key, {
+      token: token
+    })
+  }
 
 }
 

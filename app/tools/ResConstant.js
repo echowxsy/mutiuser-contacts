@@ -61,6 +61,11 @@ let userMessage = {
     message: 'Token校验失败',
     key: 'TOKEN_ERROR'
   },
+  TOKEN_REFRESH: {
+    code: 200,
+    message: 'Token刷新成功',
+    key: 'TOKEN_REFRESH'
+  },
 }
 
 let resConstant = {
