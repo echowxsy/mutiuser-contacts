@@ -28,9 +28,10 @@ class UserController {
     if (user) {
       throw new Error(ResConstant.EMAIL_USED.key);
     }
+    const passwordHash = crypto.createHash('md5').update(password).digest('hex');
     user = await UserModel.create({
       email: email,
-      password: md5.update(password).digest('hex'),
+      password: passwordHash,
     })
     ctx.returnValue(ResConstant.REGIST_SUCCESS.key);
   }
@@ -44,10 +45,11 @@ class UserController {
     if (!email || !password) {
       throw new Error(ResConstant.ERROR_ARGUMENTS.key);
     }
+    const passwordHash = crypto.createHash('md5').update(password).digest('hex');
     let user = await UserModel.findOne({
       where: {
         email: email,
-        password: md5.update(password).digest('hex'),
+        password: passwordHash,
       }
     })
     if (!user) {
