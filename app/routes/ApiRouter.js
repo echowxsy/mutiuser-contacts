@@ -29,4 +29,5 @@ api.delete('/group', JsonWebTokenMiddleware, GroupController.del);
 api.get('/group/:groupId', JsonWebTokenMiddleware, GroupController.getContactList);
 api.put('/group/:groupId', JsonWebTokenMiddleware, GroupController.addContact);
 api.delete('/group/:groupId', JsonWebTokenMiddleware, GroupController.removeContact);
+
 module.exports = api;

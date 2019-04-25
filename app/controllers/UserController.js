@@ -61,8 +61,16 @@ class UserController {
     }, config.jwt.scret, {
       expiresIn: config.jwt.expiresIn
     });
+    const refreshToken = jwt.sign({
+      email: user.email,
+      userId: user.id
+    }, config.jwt.scret, {
+      expiresIn: config.jwt.expiresIn,
+      notBefore: config.jwt.notBefore,
+    });
     ctx.returnValue(ResConstant.LOGIN_SUCCESS.key, {
-      token: token
+      token: token,
+      refresh_token: refreshToken
     })
   }
 

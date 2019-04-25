@@ -61,6 +61,11 @@ const userMessage = {
     message: 'Token校验失败',
     key: 'TOKEN_ERROR'
   },
+  TOKEN_NOT_USE_NOW: {
+    code: 106,
+    message: 'refresh_token未到使用时间',
+    key: 'TOKEN_NOT_USE_NOW'
+  },
   TOKEN_REFRESH: {
     code: 0,
     message: 'Token刷新成功',

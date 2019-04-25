@@ -12,6 +12,9 @@ async function verify(token) {
         if (error.name == 'JsonWebTokenError') {
           throw new Error(ResConstant.TOKEN_ERROR.key);
         }
+        if (error.name == 'NotBeforeError') {
+          throw new Error(ResConstant.TOKEN_NOT_USE_NOW.key);
+        }
         reject(error)
       } else {
         resolve(decoded);
