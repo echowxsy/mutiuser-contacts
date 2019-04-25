@@ -66,7 +66,30 @@ class UserController {
     })
   }
 
-  async changePassword(ctx) {}
+  async changePassword(ctx) {
+    const {
+      oldpassword,
+      password
+    } = ctx.request.body;
+    const userId = ctx.passport.userId;
+    if (!oldpassword || !password) {
+      throw new Error(ResConstant.ERROR_ARGUMENTS.key);
+    }
+    let user = await UserModel.findOne({
+      where: {
+        id: userId
+      }
+    });
+    const oldpasswordHash = crypto.createHash('md5').update(oldpassword).digest('hex');
+    const passwordHash = crypto.createHash('md5').update(password).digest('hex');
+    if (user.password != oldpasswordHash) {
+      throw new Error(ResConstant.PASSWORD_ERROR.key);
+    }
+    await user.update({
+      password: passwordHash
+    })
+    ctx.returnValue(ResConstant.UPDATE_PASSWORD_SUCCESS.key)
+  }
 
   async logout(ctx) {}
 

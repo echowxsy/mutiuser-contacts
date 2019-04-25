@@ -45,7 +45,12 @@ let userMessage = {
     code: 103,
     message: '需要登录',
     key: 'USER_NEED_LOGIN'
-  }
+  },
+  UPDATE_PASSWORD_SUCCESS: {
+    code: 200,
+    message: '密码修改成功',
+    key: 'UPDATE_PASSWORD_SUCCESS'
+  },
 }
 
 let resConstant = {
