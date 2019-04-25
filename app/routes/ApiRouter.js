@@ -13,7 +13,7 @@ api.get('/', (ctx) => {
 
 api.post('/regist', UserController.regist);
 api.post('/login', UserController.login);
-api.post('/user', JsonWebTokenMiddleware, UserController.changePassword);
+api.put('/user', JsonWebTokenMiddleware, UserController.changePassword);
 api.get('/oauth/refreshtoken', JsonWebTokenMiddleware, UserController.refreshToken);
 
 api.post('/contact', JsonWebTokenMiddleware, ContactController.add);
