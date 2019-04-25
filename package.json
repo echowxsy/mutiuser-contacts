@@ -4,7 +4,8 @@
   "description": "这是一个多用户通讯录系统的后端Demo",
   "main": "app.js",
   "scripts": {
-    "test": "nyc -a mocha --recursive --exit"
+    "test": "nyc -a mocha --recursive --exit",
+    "start": "node app.js"
   },
   "author": "Echowxsy",
   "license": "MIT",
