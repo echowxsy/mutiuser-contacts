@@ -17,7 +17,7 @@ const systemMessage = { //code range(-1,9)
 }
 const userMessage = {
   REGIST_SUCCESS: {
-    code: 200,
+    code: 0,
     message: '注册成功',
     key: 'REGIST_SUCCESS'
   },
@@ -37,7 +37,7 @@ const userMessage = {
     key: 'PASSWORD_ERROR'
   },
   LOGIN_SUCCESS: {
-    code: 200,
+    code: 0,
     message: '登陆成功',
     key: 'LOGIN_SUCCESS'
   },
@@ -47,7 +47,7 @@ const userMessage = {
     key: 'USER_NEED_LOGIN'
   },
   UPDATE_PASSWORD_SUCCESS: {
-    code: 200,
+    code: 0,
     message: '密码修改成功',
     key: 'UPDATE_PASSWORD_SUCCESS'
   },
@@ -62,14 +62,14 @@ const userMessage = {
     key: 'TOKEN_ERROR'
   },
   TOKEN_REFRESH: {
-    code: 200,
+    code: 0,
     message: 'Token刷新成功',
     key: 'TOKEN_REFRESH'
   },
 }
 const contactMessage = {
   CONTACT_ADD_SUCCESS: {
-    code: 200,
+    code: 0,
     message: '联系人添加成功',
     key: 'CONTACT_ADD_SUCCESS'
   },
