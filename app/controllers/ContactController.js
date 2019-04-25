@@ -52,7 +52,7 @@ class ContactController {
     const regExp = new RegExp(keyword);
     let hitList = [];
     contactList.forEach(element => {
-      if (regExp.test(JSON.stringify(element))) {
+      if (regExp.test(element.name) || regExp.test(element.phoneNumber) || regExp.test(element.birthday)) {
         hitList.push(element)
       }
     });
