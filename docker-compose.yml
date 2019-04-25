@@ -1,0 +1,26 @@
+version: '2'
+services:
+    app:
+      build: ./
+      command: 
+        - node 
+        - /mutiuser-contacts/app.js
+      ports:
+        - "3002:3002"
+      environment:
+        - DB_HOST=mysql
+        - DB_PORT=3306
+        - DB_USER=root
+        - DB_PWD=root
+        - DB_NAME=mutiuser-contacts
+        - JWT_SCRET=passwd
+      links:
+        - mysql
+    mysql:
+      image: mysql:5.7
+      restart: always
+      ports:
+        - "3406:3306"
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=mutiuser-contacts
