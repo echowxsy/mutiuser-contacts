@@ -5,7 +5,17 @@ const config = require('../config/index');
 async function verify(token) {
   return new Promise((resolve, reject) => {
     jwt.verify(token, config.jwt.scret, (error, decoded) => {
-      error ? reject(error) : resolve(decoded);
+      if (error) {
+        if (error.name == 'TokenExpiredError') {
+          throw new Error(ResConstant.TOKEN_EXPIRED.key);
+        }
+        if (error.name == 'JsonWebTokenError') {
+          throw new Error(ResConstant.TOKEN_ERROR.key);
+        }
+        reject(error)
+      } else {
+        resolve(decoded);
+      }
     });
   });
 }

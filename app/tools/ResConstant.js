@@ -51,6 +51,16 @@ let userMessage = {
     message: '密码修改成功',
     key: 'UPDATE_PASSWORD_SUCCESS'
   },
+  TOKEN_EXPIRED: {
+    code: 104,
+    message: 'Token过期，请刷新Token',
+    key: 'TOKEN_EXPIRED'
+  },
+  TOKEN_ERROR: {
+    code: 105,
+    message: 'Token校验失败',
+    key: 'TOKEN_ERROR'
+  },
 }
 
 let resConstant = {
