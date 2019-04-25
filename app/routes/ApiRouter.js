@@ -9,6 +9,10 @@ let api = Router({
   prefix: '/v1'
 })
 
+api.get('/', (ctx) => {
+  ctx.body = 'mutiuser-contacts'
+})
+
 api.get('/cachetest', MemoryCacheMiddleware, async (ctx) => {
   async function delay(time) {
     return new Promise(function (resolve, reject) {
@@ -17,11 +21,11 @@ api.get('/cachetest', MemoryCacheMiddleware, async (ctx) => {
       }, time);
     });
   };
-  await delay(3000);
+  await delay(1000);
   ctx.body = 'Hello world'
 });
 api.post('/cachetest', MemoryCacheMiddleware, (ctx) => {
-  ctx.body = '缓存将被清空'
+  ctx.body = 'clear cache'
 });
 
 api.post('/regist', UserController.regist);
