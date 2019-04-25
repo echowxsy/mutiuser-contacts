@@ -73,6 +73,11 @@ const contactMessage = {
     message: '联系人添加成功',
     key: 'CONTACT_ADD_SUCCESS'
   },
+  CONTACT_GET_SUCCESS: {
+    code: 0,
+    message: '获取联系人列表成功',
+    key: 'CONTACT_GET_SUCCESS'
+  },
 }
 
 const resConstant = {

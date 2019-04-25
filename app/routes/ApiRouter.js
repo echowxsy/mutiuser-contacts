@@ -17,5 +17,6 @@ api.post('/user', JsonWebTokenMiddleware, UserController.changePassword);
 api.get('/oauth/refreshtoken', JsonWebTokenMiddleware, UserController.refreshToken);
 
 api.post('/contact', JsonWebTokenMiddleware, ContactController.add);
+api.get('/contact', JsonWebTokenMiddleware, ContactController.get);
 
 module.exports = api;
