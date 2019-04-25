@@ -67,6 +67,18 @@ class ContactController {
     })
     ctx.returnValue(ResConstant.CONTACT_PUT_SUCCESS.key, contact)
   }
+
+  async del(ctx) {
+    const id = ctx.request.body.id;
+    const userId = ctx.passport.userId;
+    await ContactModel.destroy({
+      where: {
+        user_id: userId,
+        id: id
+      }
+    })
+    ctx.returnValue(ResConstant.CONTACT_DEL_SUCCESS.key)
+  }
 }
 
 module.exports = new ContactController();

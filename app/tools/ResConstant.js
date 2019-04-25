@@ -83,6 +83,11 @@ const contactMessage = {
     message: '联系人修改成功',
     key: 'CONTACT_PUT_SUCCESS'
   },
+  CONTACT_DEL_SUCCESS: {
+    code: 0,
+    message: '联系人删除成功',
+    key: 'CONTACT_DEL_SUCCESS'
+  },
 }
 
 const resConstant = {
