@@ -33,6 +33,7 @@ docker-compose down
 
 ### API
 
+使用`npm run doc`生成文档或参考`Postman`
 [Postman collections](https://www.getpostman.com/collections/78b93eecede739b8d284)
 
 ## 目标
