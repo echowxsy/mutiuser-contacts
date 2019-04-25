@@ -1,7 +1,7 @@
 const ResConstant = require('../tools/ResConstant');
 const ContactModel = require('../models/index').Contact;
 const UserModel = require('../models/index').User;
-
+const GroupModel = require('../models/index').Group;
 
 class ContactController {
   constructor() {}
@@ -40,6 +40,10 @@ class ContactController {
       }
     });
     const contactList = await user.getContacts({
+      include: {
+        model: GroupModel,
+        attributes: ['id', 'name']
+      },
       attributes: ['id', 'name', 'phoneNumber', 'birthday']
     });
     const keyword = ctx.query.s;
@@ -97,10 +101,6 @@ class ContactController {
     ctx.returnValue(ResConstant.CONTACT_DEL_SUCCESS.key)
   }
 
-  async search(ctx) {
-
-
-  }
 }
 
 module.exports = new ContactController();
