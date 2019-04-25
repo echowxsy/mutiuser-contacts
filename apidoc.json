@@ -1,0 +1,9 @@
+{
+  "name": "mutiuser-contacts",
+  "version": "0.0.1",
+  "description": "这是一个多用户通讯录系统的后端Demo",
+  "title": "通讯录系统API",
+  "template":{
+    "forceLanguage":"zh-cn"
+  }
+}
