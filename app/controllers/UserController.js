@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const UserModel = require('../models/index').User;
 const jwt = require('jsonwebtoken');
 const config = require('../config/index');
-
+let validator = require('validator');
 
 class UserController {
   constructor() {}
@@ -14,11 +14,8 @@ class UserController {
       password
     } = ctx.request.body;
 
-    if (!email || !password) {
+    if (!validator.isEmail(email) || validator.isEmpty(password)) {
       throw new Error(ResConstant.ERROR_ARGUMENTS.key);
-    }
-    if (!checkEmail(email)) {
-      throw new Error(ResConstant.EMAIL_ERROR.key);
     }
     let user = await UserModel.findOne({
       where: {
@@ -41,8 +38,7 @@ class UserController {
       email,
       password
     } = ctx.request.body;
-
-    if (!email || !password) {
+    if (!validator.isEmail(email) || validator.isEmpty(password)) {
       throw new Error(ResConstant.ERROR_ARGUMENTS.key);
     }
     const passwordHash = crypto.createHash('md5').update(password).digest('hex');
@@ -80,7 +76,7 @@ class UserController {
       password
     } = ctx.request.body;
     const userId = ctx.passport.userId;
-    if (!oldpassword || !password) {
+    if (validator.isEmpty(oldpassword) || validator.isEmpty(password)) {
       throw new Error(ResConstant.ERROR_ARGUMENTS.key);
     }
     let user = await UserModel.findOne({
@@ -115,9 +111,5 @@ class UserController {
 
 }
 
-function checkEmail(email) {
-  var reg = /^\w+@[a-zA-Z0-9]{2,10}(?:\.[a-z]{2,4}){1,3}$/;
-  return reg.test(email);
-}
 
 module.exports = new UserController();

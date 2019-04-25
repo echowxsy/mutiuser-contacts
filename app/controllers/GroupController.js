@@ -2,7 +2,7 @@ const ResConstant = require('../tools/ResConstant');
 const GroupModel = require('../models/index').Group;
 const UserModel = require('../models/index').User;
 const ContactModel = require('../models/index').Contact;
-
+let validator = require('validator');
 class GroupController {
   constructor() {}
 
@@ -17,6 +17,9 @@ class GroupController {
         id: userId
       }
     });
+    if (!user) {
+      throw new Error(ResConstant.ILLEGAL_REQUEST.key);
+    }
     let group = await GroupModel.create({
       name: name
     });
@@ -33,6 +36,9 @@ class GroupController {
         id: userId
       }
     });
+    if (!user) {
+      throw new Error(ResConstant.ILLEGAL_REQUEST.key);
+    }
     const groupList = await user.getGroups({
       attributes: ['id', 'name']
     });
@@ -44,7 +50,7 @@ class GroupController {
 
   async getContactList(ctx) {
     const groupId = ctx.params.groupId;
-    if (!groupId) {
+    if (!validator.isInt(groupId)) {
       throw new Error(ResConstant.ERROR_ARGUMENTS.key);
     }
     const userId = ctx.passport.userId;
@@ -55,6 +61,9 @@ class GroupController {
         id: groupId
       }
     });
+    if (!group) {
+      throw new Error(ResConstant.ILLEGAL_REQUEST.key);
+    }
     const contactList = await group.getContacts({
       attributes: ['id', 'name', 'phoneNumber', 'birthday'],
     })
@@ -70,7 +79,7 @@ class GroupController {
     const groupId = ctx.params.groupId;
     const userId = ctx.passport.userId;
     const contactId = ctx.request.body.contactId;
-    if (!groupId || !contactId) {
+    if (!validator.isInt(groupId) || !validator.isInt(contactId)) {
       throw new Error(ResConstant.ERROR_ARGUMENTS.key);
     }
     let group = await GroupModel.findOne({
@@ -80,6 +89,9 @@ class GroupController {
         id: groupId
       }
     });
+    if (!group) {
+      throw new Error(ResConstant.ILLEGAL_REQUEST.key);
+    }
     const contact = await ContactModel.findOne({
       attributes: ['id', 'name', 'phoneNumber', 'birthday'],
       where: {
@@ -96,7 +108,7 @@ class GroupController {
       id,
       name
     } = ctx.request.body;
-    if (!id || !name) {
+    if (!validator.isInt(id) || !name) {
       throw new Error(ResConstant.ERROR_ARGUMENTS.key);
     }
     const userId = ctx.passport.userId;
@@ -107,6 +119,9 @@ class GroupController {
         id: id
       }
     })
+    if (!group) {
+      throw new Error(ResConstant.ILLEGAL_REQUEST.key);
+    }
     await group.update({
       name
     })
@@ -115,6 +130,9 @@ class GroupController {
 
   async del(ctx) {
     const groupId = ctx.request.body.id;
+    if (!validator.isInt(groupId)) {
+      throw new Error(ResConstant.ERROR_ARGUMENTS.key);
+    }
     const userId = ctx.passport.userId;
     let group = await GroupModel.findOne({
       where: {
@@ -122,6 +140,9 @@ class GroupController {
         id: groupId
       }
     });
+    if (!group) {
+      throw new Error(ResConstant.ILLEGAL_REQUEST.key);
+    }
     await group.setContacts([]);
     await group.destroy();
     ctx.returnValue(ResConstant.GROUP_DEL_SUCCESS.key)
@@ -131,7 +152,7 @@ class GroupController {
     const groupId = ctx.params.groupId;
     const userId = ctx.passport.userId;
     const contactId = ctx.request.body.contactId;
-    if (!groupId || !contactId) {
+    if (!validator.isInt(groupId) || !validator.isInt(contactId)) {
       throw new Error(ResConstant.ERROR_ARGUMENTS.key);
     }
     let group = await GroupModel.findOne({

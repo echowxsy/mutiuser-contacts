@@ -2,6 +2,7 @@ const ResConstant = require('../tools/ResConstant');
 const ContactModel = require('../models/index').Contact;
 const UserModel = require('../models/index').User;
 const GroupModel = require('../models/index').Group;
+let validator = require('validator');
 
 class ContactController {
   constructor() {}
@@ -12,7 +13,7 @@ class ContactController {
       phoneNumber,
       birthday
     } = ctx.request.body;
-    if (!name || !phoneNumber) {
+    if (!name || !validator.isMobilePhone(phoneNumber)) {
       throw new Error(ResConstant.ERROR_ARGUMENTS.key);
     }
     const userId = ctx.passport.userId;
@@ -21,6 +22,9 @@ class ContactController {
         id: userId
       }
     });
+    if (!user) {
+      throw new Error(ResConstant.ILLEGAL_REQUEST.key);
+    }
     let contact = await ContactModel.create({
       name: name,
       phoneNumber: phoneNumber,
@@ -39,6 +43,9 @@ class ContactController {
         id: userId
       }
     });
+    if (!user) {
+      throw new Error(ResConstant.ILLEGAL_REQUEST.key);
+    }
     const contactList = await user.getContacts({
       include: {
         model: GroupModel,
@@ -73,6 +80,9 @@ class ContactController {
       phoneNumber,
       birthday
     } = ctx.request.body;
+    if (!name || !validator.isMobilePhone(phoneNumber)) {
+      throw new Error(ResConstant.ERROR_ARGUMENTS.key);
+    }
     const userId = ctx.passport.userId;
     let contact = await ContactModel.findOne({
       attributes: ['id', 'name', 'phoneNumber', 'birthday'],
@@ -81,6 +91,9 @@ class ContactController {
         id: id
       }
     })
+    if (!contact) {
+      throw new Error(ResConstant.ILLEGAL_REQUEST.key);
+    }
     await contact.update({
       name,
       phoneNumber,
@@ -92,12 +105,16 @@ class ContactController {
   async del(ctx) {
     const id = ctx.request.body.id;
     const userId = ctx.passport.userId;
-    await ContactModel.destroy({
+    let contact = await ContactModel.findOne({
       where: {
         user_id: userId,
         id: id
       }
     })
+    if (!contact) {
+      throw new Error(ResConstant.ILLEGAL_REQUEST.key);
+    }
+    await contact.destroy()
     ctx.returnValue(ResConstant.CONTACT_DEL_SUCCESS.key)
   }
 

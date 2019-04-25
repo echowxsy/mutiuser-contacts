@@ -13,6 +13,11 @@ const systemMessage = { //code range(-1,9)
     code: 1,
     message: '错误的参数',
     key: 'ERROR_ARGUMENTS'
+  },
+  ILLEGAL_REQUEST: {
+    code: -1,
+    message: '非法请求',
+    key: 'ILLEGAL_REQUEST'
   }
 }
 const userMessage = {
